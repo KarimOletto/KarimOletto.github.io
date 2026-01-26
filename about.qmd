@@ -1,4 +1,9 @@
 ---
 title: "About"
 image: img/WIP.jpg
+about:
+  id: hero-heading
+  template: jolla
+  image-shape: round
+  image-width: 10em
 ---
