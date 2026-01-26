@@ -1,0 +1,32 @@
+---
+title: "Carolina Maria Oletto"
+image: img/me.png
+about:
+  id: hero-heading
+  template: jolla
+  image-shape: round
+  image-width: 10em
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/KarimOletto
+    - text: "<img src='img/research.png' style='height:1em; margin-right:0.3em;'> ResearchGate"
+      href: https://www.researchgate.net/profile/Carolina-Oletto?ev=hdr_xprf
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/carolina-maria-oletto-bba5981b2/ 
+    - icon: flower3
+      text: OSF
+      href: https://osf.io/vqybe/
+markdown:
+  extensions: [link_attributes]
+engine: knitr
+---
+
+::: {#hero-heading}
+I am a **postdoctoral** researcher at the Faculty of Health Sciences, **University of Southern Denmark**, Odense, Denmark.
+
+My research interests include **visual perception** in the periphery of the visual field, in both general and clinical populations.
+
+In my free time, I count kernel panics and reinstall operating systems—often in that order.
+:::
