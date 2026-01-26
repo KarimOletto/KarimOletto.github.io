@@ -1,9 +1,4 @@
 ---
 title: "About"
+image: img/WIP.jpg
 ---
-
-About this site
-
-```{r}
-1 + 1
-```
