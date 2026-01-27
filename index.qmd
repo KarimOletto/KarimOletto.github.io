@@ -4,7 +4,7 @@ image: img/me.png
 about:
   id: hero-heading
   template: jolla
-  image-shape: round
+  image-shape: rectangle
   image-width: 10em
   links:
     - icon: github
@@ -18,6 +18,8 @@ about:
     - icon: flower3
       text: OSF
       href: https://osf.io/vqybe/
+    - icon: email
+      text: carma@health.sdu.dk
 markdown:
   extensions: [link_attributes]
 engine: knitr
