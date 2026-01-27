@@ -18,8 +18,9 @@ about:
     - icon: flower3
       text: OSF
       href: https://osf.io/vqybe/
-    - icon: email
+    - icon: envelope
       text: carma@health.sdu.dk
+      href: mailto:carma@health.sdu.dk
 markdown:
   extensions: [link_attributes]
 engine: knitr
