@@ -1,0 +1,229 @@
+---
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: Section
+    toc-location: right
+    page-layout: full
+from: markdown+emoji  
+---
+
+```{r}
+#| label: cvevents
+#| echo: false
+
+cvevents <- function(tbl, when, what, where, details = NULL) {
+  result <- ""
+
+  for (i in seq_len(nrow(tbl))) {
+    block <- '<div class="cvevent">\n'
+    
+    # Left column
+    block <- paste0(block, '  <div class="cvevent-left">\n')
+    block <- paste0(block, '    <strong>', tbl[[what]][i], '</strong><br/>\n')
+    block <- paste0(block, '    <em>', tbl[[where]][i], '</em><br/>\n')
+
+    if (!is.null(details)) {
+      detail_items <- tbl[[details]][[i]]
+
+      if (length(detail_items) > 0) {
+        block <- paste0(block, '    <ul>\n')
+        for (item in detail_items) {
+          # Auto-link any URLs in item
+          item <- gsub("(https?://[^\\s)]+)", "<a href='\\1' target='_blank' rel='noopener noreferrer'>\\1</a>", item, perl = TRUE)
+          block <- paste0(block, '      <li>', item, '</li>\n')
+        }
+        block <- paste0(block, '    </ul>\n')
+      }
+    }
+
+    block <- paste0(block, '  </div>\n')
+
+    # Right column (date)
+    block <- paste0(
+      block,
+      '  <div class="cvevent-right">',
+      tbl[[when]][i],
+      '</div>\n'
+    )
+
+    block <- paste0(block, '</div>\n\n')
+    result <- paste0(result, block)
+  }
+
+  knitr::asis_output(result)
+}
+
+```
+
+## Current Position
+
+```{r}
+#| label: experience
+#| output: asis
+#| echo: false
+tibble::tribble(
+    ~role, ~institution, ~dates, ~details, ~tasks,
+    "Postdoctoral Researcher", "Department of Psychology, University of Southern Denmark, Denmark", " 01/01/2026 - Present",
+    " ", c(    "Dual-sensory loss: audio-visual perception in macular degeneration coupled with loss of auditory functions",
+      "Collaborations:
+        <ul style='margin-top:0.1em; margin-bottom:0.1em'>
+          <li>The Audiology Department (Prof. Tobias Neher)</li>
+          <li>The Eriksholm Research Centre (Dr. Dorothea Wendt)</li>
+          <li>The Department of Audiology (Dr. Rikke Schnack-Petersen) at Odense University Hospital</li>
+          <li>The Department of Ophthalmology (Prof. Jakob Grauslund) at Odense University Hospital</li>
+    </ul>",
+    "Supervisor: Prof. Søren Krogh Andersen")) |>
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+```
+
+## Education
+
+```{r }
+#| label: education
+#| output: asis
+#| echo: false
+tibble::tribble(
+    ~degree, ~institution, ~dates, ~details,
+    "Ph.D. in Psychological Sciences", "University of Padova, Italy", "01/10/2021 - 30/09/2024", 
+      c("Thesis: Subjective appearance and objective discrimination of shapes in the periphery of the visual field", "https://www.research.unipd.it/handle/11577/3555573",
+        "Supervisors: Prof. Marco Bertamini, Prof. Luca Battaglini"),
+    "Master Degree in Neuroscience and Neuropsyhcological Rehabilitation", "University of Padova, Italy", "01/10/2017 - 23/05/2020", 
+      c("Thesis:  Perceptual learning improves visual functions in albinistic amblyopia", "Supervisor: Prof. Clara Casco"),
+    "Bachelor Degree in Sciences and Techniques of Clinical and Health
+Psychology", "University of Pisa, Italy", "01/10/2014 - 13/09/2017",NULL
+) |>
+  cvevents(when = "dates", what = "degree", where = "institution", details = "details")
+```
+
+\newpage
+
+## Previous Positions
+
+```{r}
+#| label: research_experience
+#| output: asis
+#| echo: false
+tibble::tribble(
+  ~degree, ~institution, ~dates, ~details,
+  
+  "Postdoctoral Researcher",
+  "Department of General Psychology, University of Padova, Italy",
+  "01/10/2024 - 30/09/2025",
+  c(
+    "Project: Object ReCognition datA (ORCA)",
+    "Collection and analysis of a large EEG dataset",
+    "Focus on neural responses to object images across categories and symmetry",
+    "Supervisor: Prof. Marco Bertamini"
+  ),
+  
+  "Research Assistant, Visual Perception Lab",
+  "Department of General Psychology, University of Padova, Italy",
+  "30/01/2021 - 30/09/2021",
+  c(
+    "Data collection for a behavioural experiment on shape perception in the visual periphery",
+    "Focus on the interplay between foveal and peripheral vision",
+    "Supervisor: Prof. Marco Bertamini"
+  ),
+  
+  "Research Assistant, NeuroVis.U.S. Lab",
+  "Department of General Psychology, University of Padova, Italy",
+  "22/03/2018 - 23/05/2020",
+  c(
+    "Study of the effects of a perceptual learning paradigm in patients with bilateral amblyopia secondary to albinism",
+    "Supervisor: Prof. Clara Casco"
+  )
+) |>
+  cvevents(when = "dates", what = "degree", where = "institution", details = "details")
+
+```
+
+\newpage
+
+## Mobility
+
+```{r}
+#| label: Abroad 
+#| output: asis
+#| echo: false
+tibble::tribble(
+    ~role, ~institution, ~dates, ~details, ~tasks,
+  "Visiting Ph.D.",
+  "University of Liverpool, Liverpool, UK",
+  "16/02/2024 - 03/03/2024",
+  "",
+  c(
+    "EEG data collection, preprocessing, and analysis of symmetry-induced ERPs",
+    "Supervisor: Prof. Alexis Makin"
+  ),
+  
+  "Visiting Ph.D.",
+  "École polytechnique fédérale de Lausanne (EPFL), Lausanne, Switzerland",
+  "01/03/2023 - 01/06/2023",
+  "",
+  c(
+    "Data collection for behavioural experiments on the dissociation between detection and discrimination of peripheral elements",
+    "Comparison between uniform and non-uniform textures",
+    "Supervisor: Prof. Michael Herzog")
+    ) |>
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+```
+
+\newpage
+
+## Events
+
+```{r}
+#| label: conferences
+#| output: asis
+#| echo: false
+
+cat("### Conferences\n\n")
+
+tibble::tribble(
+  ~year, ~event, ~location,
+  
+  "2025",
+  "European Conference of Visual Perception (ECVP), Mainz, Germany",
+  "Poster: Sustained Posterior Negativity (SPN) in response to natural, uncontrolled symmetrical stimuli",
+  
+  "2025",
+  "6th International Brain Stimulation Conference, Kobe, Japan",
+  "Poster: Combined transcranial alternating current stimulation and perceptual learning for vision improvement in a single-case study of cone dystrophy",
+  
+  "2024",
+  "European Conference of Visual Perception (ECVP), Aberdeen, Scotland",
+  "Talk: The CRIP effect: patterns in central vision interfere with perception of patterns in the periphery",
+  
+  "2024",
+  "Cognitive Science Arena, Brixen, Italy",
+  "Talk: The centre shapes the periphery: the importance of elements in the centre in uniformity perception",
+  
+  "2023",
+  "European Conference of Visual Perception (ECVP), Paphos, Cyprus",
+  "Poster: Is peripheral object discrimination relying on visual imagery?",
+  
+  "2023",
+  "Cognitive Science Arena, Brixen, Italy",
+  "Talk: The Honeycomb Illusion is not an illusion",
+  
+  "2023",
+  "The Science of Consciousness (TSC), Taormina, Italy",
+  "Talk: The Honeycomb Illusion is not an illusion",
+  
+  "2022",
+  "European Conference of Visual Perception (ECVP), Nijmegen, The Netherlands",
+  "Poster: Foveal feedback in the parvocellular and magnocellular systems: comparing a shape and a non-shape task",
+  
+  "2022",
+  "30° Congresso dell’Associazione Italiana di Psicologia, Padova, Italy",
+  "Talk: Foveal retinotopic cortex in peripheral non-shape discrimination tasks: comparing magnocellular and parvocellular systems"
+) |>
+  cvevents(
+    when = "year",
+    what = "event",
+    where = "location"
+  )
+
+```

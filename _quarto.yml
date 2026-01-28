@@ -11,14 +11,16 @@ website:
     logo-href: index.qmd
     left:
       - about.qmd
+      - text: "cv"
+        href: cv.qmd
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: yeti
     css: styles.css
     toc: true
+    page-layout: full
 
 editor: visual
 
