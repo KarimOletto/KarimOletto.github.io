@@ -227,3 +227,29 @@ tibble::tribble(
   )
 
 ```
+
+\newpage
+
+## Publications
+
+<ul>
+
+<li>Contemori, G., Musa, M., Demirkapi, D., Passaggi, M., <strong>Oletto</strong>, C. M., Battaglini, L., & Bertamini, M. (2026). Sustained posterior negativity (SPN) elicited by brief (20 ms) symmetrical stimuli. <em>Frontiers in Psychology, 16</em>. <https://doi.org/10.3389/fpsyg.2025.1657531></li>
+
+<li>Contemori, G., Musa, M., <strong>Oletto</strong>, C. M., Vicentin, S., Battaglini, L., Cona, G., & Bertamini, M. (2025). Metacontrast masking of symmetric stimuli. <em>PLOS ONE, 20</em>(8), e0330019. <https://doi.org/10.1371/journal.pone.0330019></li>
+
+<li><strong>Oletto</strong>, C. M., Contemori, G., Yavuz, E. D., Battaglini, L., Herzog, M., & Bertamini, M. (2025). The CRIP effect: How a pattern in central vision interferes with perception of a pattern in the periphery. <em>Journal of Vision, 25</em>(2), 10. <https://doi.org/10.1167/jov.25.2.10></li>
+
+<li>Bertamini, M., <strong>Oletto</strong>, C. M., & Contemori, G. (2024). The role of uniform textures in making texture elements visible in the visual periphery. <em>Open Mind, 8</em>, 462–482. <https://doi.org/10.1162/opmi_a_00136></li>
+
+<li>Contemori, G., <strong>Oletto</strong>, C. M., Battaglini, L., & Bertamini, M. (2024). On the relationship between foveal mask interference and mental imagery in peripheral object recognition. <em>Proceedings of the Royal Society B: Biological Sciences, 291</em>(2018), 20232867. <https://doi.org/10.1098/rspb.2023.2867></li>
+
+<li>Contemori, G., <strong>Oletto</strong>, C. M., Battaglini, L., Motterle, E., & Bertamini, M. (2023). Foveal feedback in perceptual processing: Contamination of neural representations and task difficulty effects. <em>PLOS ONE, 18</em>(10), e0291275. <https://doi.org/10.1371/journal.pone.0291275></li>
+
+<li><strong>Oletto</strong>, C. M., Contemori, G., Bertamini, M., & Battaglini, L. (2022). The role of foveal cortex in discriminating peripheral stimuli: The sketchpad hypothesis. <em>NeuroSci, 4</em>(1), 9–17. <https://doi.org/10.3390/neurosci4010002></li>
+
+<li>Contemori, G., <strong>Oletto</strong>, C. M., Cessa, R., Marini, E., Ronconi, L., Battaglini, L., & Bertamini, M. (2022). Investigating the role of the foveal cortex in peripheral object discrimination. <em>Scientific Reports, 12</em>, 19952. <https://doi.org/10.1038/s41598-022-23720-w></li>
+
+<li>Battaglini, L., <strong>Oletto</strong>, C. M., Contemori, G., Barollo, M., Ciavarelli, A., & Casco, C. (2021). Perceptual learning improves visual functions in patients with albinistic bilateral amblyopia: A pilot study. <em>Restorative Neurology and Neuroscience, 39</em>(1), 45–59. <https://doi.org/10.3233/RNN-201043></li>
+
+</ul>
