@@ -14,41 +14,40 @@ from: markdown+emoji
 #| echo: false
 
 cvevents <- function(tbl, when, what, where, details = NULL) {
-  result <- ""
+  result <- '<style>
+    .cvevent { display: flex; justify-content: space-between; margin-bottom: 1em; }
+    .cvevent-left { max-width: 75%; }
+    .cvevent-right { text-align: right; font-weight: bold; min-width: 15%; }
+  </style>\n\n'
 
   for (i in seq_len(nrow(tbl))) {
-    block <- '<div class="cvevent">\n'
+    block <- '<div class="cvevent">'
     
     # Left column
-    block <- paste0(block, '  <div class="cvevent-left">\n')
-    block <- paste0(block, '    <strong>', tbl[[what]][i], '</strong><br/>\n')
-    block <- paste0(block, '    <em>', tbl[[where]][i], '</em><br/>\n')
-
+    block <- paste0(block, '<div class="cvevent-left">', tbl[[what]][i], '<br/><em>', tbl[[where]][i], '</em>')
+    
     if (!is.null(details)) {
       detail_items <- tbl[[details]][[i]]
-
       if (length(detail_items) > 0) {
-        block <- paste0(block, '    <ul>\n')
+        block <- paste0(block, '<ul>')
         for (item in detail_items) {
-          # Auto-link any URLs in item
-          item <- gsub("(https?://[^\\s)]+)", "<a href='\\1' target='_blank' rel='noopener noreferrer'>\\1</a>", item, perl = TRUE)
-          block <- paste0(block, '      <li>', item, '</li>\n')
+item <- gsub(
+  "(https?://[[:alnum:]/?=&%.:+_-]+)",
+  '<a href="\\1" target="_blank" rel="noopener noreferrer">\\1</a>',
+  item
+)
+          block <- paste0(block, '<li>', item, '</li>')
         }
-        block <- paste0(block, '    </ul>\n')
+        block <- paste0(block, '</ul>')
       }
     }
-
-    block <- paste0(block, '  </div>\n')
-
-    # Right column (date)
-    block <- paste0(
-      block,
-      '  <div class="cvevent-right">',
-      tbl[[when]][i],
-      '</div>\n'
-    )
-
-    block <- paste0(block, '</div>\n\n')
+    
+    block <- paste0(block, '</div>') # close left
+    
+    # Right column
+    block <- paste0(block, '<div class="cvevent-right">', tbl[[when]][i], '</div>')
+    
+    block <- paste0(block, '</div>\n')
     result <- paste0(result, block)
   }
 
@@ -63,19 +62,20 @@ cvevents <- function(tbl, when, what, where, details = NULL) {
 #| label: experience
 #| output: asis
 #| echo: false
+
 tibble::tribble(
-    ~role, ~institution, ~dates, ~details, ~tasks,
-    "Postdoctoral Researcher", "Department of Psychology, University of Southern Denmark, Denmark", " 01/01/2026 - Present",
-    " ", c(    "Dual-sensory loss: audio-visual perception in macular degeneration coupled with loss of auditory functions",
-      "Collaborations:
-        <ul style='margin-top:0.1em; margin-bottom:0.1em'>
-          <li>The Audiology Department (Prof. Tobias Neher)</li>
-          <li>The Eriksholm Research Centre (Dr. Dorothea Wendt)</li>
-          <li>The Department of Audiology (Dr. Rikke Schnack-Petersen) at Odense University Hospital</li>
-          <li>The Department of Ophthalmology (Prof. Jakob Grauslund) at Odense University Hospital</li>
-    </ul>",
-    "Supervisor: Prof. Søren Krogh Andersen")) |>
-    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+  ~role, ~institution, ~dates, ~details,
+  "<b>Postdoctoral Researcher</b>", 
+  "Department of Psychology, University of Southern Denmark, Denmark", 
+  "01/01/2026 - Present",
+  "Dual-sensory loss: audio-visual perception in macular degeneration coupled with loss of auditory functions.<br>Supervisor: Prof. Søren Krogh Andersen"
+) |> 
+cvevents(
+  when = "dates", 
+  what = "role", 
+  where = "institution", 
+  details = "details"
+)
 ```
 
 ## Education
@@ -86,18 +86,16 @@ tibble::tribble(
 #| echo: false
 tibble::tribble(
     ~degree, ~institution, ~dates, ~details,
-    "Ph.D. in Psychological Sciences", "University of Padova, Italy", "01/10/2021 - 30/09/2024", 
+    "<b>Ph.D. in Psychological Sciences</b>", "University of Padova, Italy", "01/10/2021 - 30/09/2024", 
       c("Thesis: Subjective appearance and objective discrimination of shapes in the periphery of the visual field", "https://www.research.unipd.it/handle/11577/3555573",
         "Supervisors: Prof. Marco Bertamini, Prof. Luca Battaglini"),
-    "Master Degree in Neuroscience and Neuropsyhcological Rehabilitation", "University of Padova, Italy", "01/10/2017 - 23/05/2020", 
+    "<b>Master Degree in Neuroscience and Neuropsyhcological Rehabilitation</b>", "University of Padova, Italy", "01/10/2017 - 23/05/2020", 
       c("Thesis:  Perceptual learning improves visual functions in albinistic amblyopia", "Supervisor: Prof. Clara Casco"),
-    "Bachelor Degree in Sciences and Techniques of Clinical and Health
-Psychology", "University of Pisa, Italy", "01/10/2014 - 13/09/2017",NULL
+    "<b>Bachelor Degree in Sciences and Techniques of Clinical and Health
+Psychology</b>", "University of Pisa, Italy", "01/10/2014 - 13/09/2017",NULL
 ) |>
   cvevents(when = "dates", what = "degree", where = "institution", details = "details")
 ```
-
-\newpage
 
 ## Previous Positions
 
@@ -108,7 +106,7 @@ Psychology", "University of Pisa, Italy", "01/10/2014 - 13/09/2017",NULL
 tibble::tribble(
   ~degree, ~institution, ~dates, ~details,
   
-  "Postdoctoral Researcher",
+  "<b>Postdoctoral Researcher</b>",
   "Department of General Psychology, University of Padova, Italy",
   "01/10/2024 - 30/09/2025",
   c(
@@ -118,8 +116,8 @@ tibble::tribble(
     "Supervisor: Prof. Marco Bertamini"
   ),
   
-  "Research Assistant, Visual Perception Lab",
-  "Department of General Psychology, University of Padova, Italy",
+  "<b>Research Assistant</b>",
+  "Visual Perception Lab, Department of General Psychology, University of Padova, Italy",
   "30/01/2021 - 30/09/2021",
   c(
     "Data collection for a behavioural experiment on shape perception in the visual periphery",
@@ -127,8 +125,8 @@ tibble::tribble(
     "Supervisor: Prof. Marco Bertamini"
   ),
   
-  "Research Assistant, NeuroVis.U.S. Lab",
-  "Department of General Psychology, University of Padova, Italy",
+  "<b>Research Assistant</b>",
+  "NeuroVis.U.S. Lab, Department of General Psychology, University of Padova, Italy",
   "22/03/2018 - 23/05/2020",
   c(
     "Study of the effects of a perceptual learning paradigm in patients with bilateral amblyopia secondary to albinism",
@@ -139,8 +137,6 @@ tibble::tribble(
 
 ```
 
-\newpage
-
 ## Mobility
 
 ```{r}
@@ -149,7 +145,7 @@ tibble::tribble(
 #| echo: false
 tibble::tribble(
     ~role, ~institution, ~dates, ~details, ~tasks,
-  "Visiting Ph.D.",
+  "<b>Visiting Ph.D.</b>",
   "University of Liverpool, Liverpool, UK",
   "16/02/2024 - 03/03/2024",
   "",
@@ -158,7 +154,7 @@ tibble::tribble(
     "Supervisor: Prof. Alexis Makin"
   ),
   
-  "Visiting Ph.D.",
+  "<b>Visiting Ph.D.</b>",
   "École polytechnique fédérale de Lausanne (EPFL), Lausanne, Switzerland",
   "01/03/2023 - 01/06/2023",
   "",
@@ -170,9 +166,40 @@ tibble::tribble(
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
 ```
 
-\newpage
-
 ## Events
+
+```{r}
+#| label: workshops
+#| output: asis
+#| echo: false
+
+cat("### Workshops & Invited Talks\n\n")
+
+tibble::tribble(
+  ~date, ~event, ~location, ~details,
+  
+  "24/08/2025",
+  "A Practical Introduction to Evidence Accumulation Models in Visual Perception Research, European Conference of Visual Perception (ECVP)",
+  "Mainz, Germany",
+  "https://mar-cald.github.io/eam-workshop/eam-home.html",
+  
+  "27/05/2025",
+  "Subjective appearance and objective discrimination of shapes in the periphery of the visual field, Max Planck Institute for Biological Cybernetics",
+  "Tübingen, Germany",
+  "https://www.mph.tuebingen.mpg.de/events/41944/2911",
+  
+  "09/10/2024",
+  "Peripheral Vision: What Are Its Limits and Hidden Strengths? (The CRIP effect: patterns in central vision interfere with perception of patterns in the periphery)",
+  "Padova, Italy",
+  "https://mediaspace.unipd.it/media/La+mia+riunione/1_keutudso?st=451"
+) |>
+  cvevents(
+    when = "date",
+    what = "event",
+    where = "location",
+    details = "details"
+  )
+```
 
 ```{r}
 #| label: conferences
@@ -182,53 +209,140 @@ tibble::tribble(
 cat("### Conferences\n\n")
 
 tibble::tribble(
-  ~year, ~event, ~location,
+  ~year, ~what, ~where,
   
   "2025",
-  "European Conference of Visual Perception (ECVP), Mainz, Germany",
+  "<b>European Conference of Visual Perception, ECVP, Mainz, Germany</b>",
   "Poster: Sustained Posterior Negativity (SPN) in response to natural, uncontrolled symmetrical stimuli",
   
   "2025",
-  "6th International Brain Stimulation Conference, Kobe, Japan",
+  "<b>6th International Brain Stimulation Conference, Kobe, Japan</b>",
   "Poster: Combined transcranial alternating current stimulation and perceptual learning for vision improvement in a single-case study of cone dystrophy",
   
   "2024",
-  "European Conference of Visual Perception (ECVP), Aberdeen, Scotland",
+  "<b>European Conference of Visual Perception, ECVP, Aberdeen, Scotland</b>",
   "Talk: The CRIP effect: patterns in central vision interfere with perception of patterns in the periphery",
   
   "2024",
-  "Cognitive Science Arena, Brixen, Italy",
+  "<b>Cognitive Science Arena, Brixen, Italy</b>",
   "Talk: The centre shapes the periphery: the importance of elements in the centre in uniformity perception",
   
   "2023",
-  "European Conference of Visual Perception (ECVP), Paphos, Cyprus",
+  "<b>European Conference of Visual Perception, ECVP, Paphos, Cyprus</b>",
   "Poster: Is peripheral object discrimination relying on visual imagery?",
   
   "2023",
-  "Cognitive Science Arena, Brixen, Italy",
+  "<b>Cognitive Science Arena, Brixen, Italy</b>",
   "Talk: The Honeycomb Illusion is not an illusion",
   
   "2023",
-  "The Science of Consciousness (TSC), Taormina, Italy",
+  "<b>The Science of Consciousness, TSC, Taormina, Italy</b>",
   "Talk: The Honeycomb Illusion is not an illusion",
   
   "2022",
-  "European Conference of Visual Perception (ECVP), Nijmegen, The Netherlands",
+  "<b>European Conference of Visual Perception, ECVP, Nijmegen, Netherlands</b>",
   "Poster: Foveal feedback in the parvocellular and magnocellular systems: comparing a shape and a non-shape task",
   
   "2022",
-  "30° Congresso dell’Associazione Italiana di Psicologia, Padova, Italy",
-  "Talk: Foveal retinotopic cortex in peripheral non-shape discrimination tasks: comparing magnocellular and parvocellular systems"
+  "<b>30° Congresso dell’Associazione Italiana di Psicologia, Padova, Italy</b>",
+  "Talk: Foveal retinotopic cortex in peripheral non-shape discrimination tasks: comparing magno and parvocellular system"
+) |>
+cvevents(
+  when = "year",
+  what = "what",
+  where = "where"
+)
+```
+
+```{r}
+#| label: summer_school
+#| output: asis
+#| echo: false
+
+cat("### Summer School\n\n")
+
+tibble::tribble(
+  ~date, ~event, ~location,
+  
+  "01/09/2024 – 13/09/2024",
+  "<b>Summer School in Visual Neuroscience – From spikes to awareness</b>",
+  "Rauischholzhausen, Marburg, Germany"
 ) |>
   cvevents(
-    when = "year",
+    when = "date",
     what = "event",
     where = "location"
   )
-
 ```
 
-\newpage
+## Teaching and Supervision Experience
+
+```{r}
+#| label: teaching
+#| output: asis
+#| echo: false
+
+cat("### Teaching Experience\n\n")
+
+tibble::tribble(
+  ~year, ~role, ~details,
+  
+  "2025",
+  "<b>Lecturer, Università di Padova, Padova, Italy</b>",
+  "Course: Transcranial Electrical Stimulation (tES) (20 hours)",
+  
+  "2024",
+  "<b>Teaching Assistant, Università di Padova, Padova, Italy</b>",
+  "Course: Cognition and Sensory Perception (15 hours)",
+  
+  "2024",
+  "<b>Lecturer, Università di Padova, Padova, Italy</b>",
+  "Course: Transcranial Electrical Stimulation (tES) (20 hours)",
+  
+  "2023",
+  "<b>Teaching Assistant, Università di Padova, Padova, Italy</b>",
+  "Course: Basic Concepts of Psychology (10 hours)",
+  
+  "2022",
+  "<b>Teaching Assistant, Università di Padova, Padova, Italy</b>",
+  "Course: Basic Concepts of Psychology (10 hours)"
+) |>
+  cvevents(
+    when = "year",
+    what = "role",
+    where = "details"
+  )
+```
+
+```{r}
+#| label: supervision
+#| output: asis
+#| echo: false
+
+cat("\n\n### Supervision\n\n")
+
+tibble::tribble(
+  ~year, ~what, ~where, ~details,
+  
+  "2024",
+  "Bachelor Thesis, Università di Padova, Padova, Italy (Co-Supervisor)", "The effect of a central pattern on peripheral discrimination at different degrees of uniformity perception.",
+  "https://hdl.handle.net/20.500.12608/79557",
+  
+  "2023",
+  "Bachelor Thesis, Università di Padova, Padova, Italy (Co-Supervisor)", "The Honeycomb illusion: Peripheral vision of contours, unlike that of objects, is refractory to predictions, extrapolation and memory effects.",
+  "https://hdl.handle.net/20.500.12608/51540",
+  
+  "2022",
+  "Bachelor Thesis, Università di Padova, Padova, Italy (Co-Supervisor)", "Fenomenologia della percezione e illusioni ottiche: il caso dell’Honeycomb illusion.",
+  "https://thesis.unipd.it/retrieve/2b8a5a3a-ae09-4afb-af9a-274f2bbeca6f/Cepparrone_Freda_Federica.pdf"
+) |>
+cvevents(
+  when = "year",
+  what = "what",
+  where = "where",
+  details = "details"
+)
+```
 
 ## Publications
 
@@ -255,3 +369,106 @@ tibble::tribble(
 <li>Battaglini, L., <strong>Oletto</strong>, C. M., Contemori, G., Barollo, M., Ciavarelli, A., & Casco, C. (2021). Perceptual learning improves visual functions in patients with albinistic bilateral amblyopia: A pilot study. <em>Restorative Neurology and Neuroscience, 39</em>(1), 45–59. <https://doi.org/10.3233/RNN-201043></li>
 
 </ul>
+
+## Conference Proceedings
+
+<ul>
+
+<li><strong>Oletto</strong>, C. M., Ghiani, A., Battaglini, L., Vallesi, A., Bisiacchi, P., Makin, A., & Bertamini, M. (2025). Sustained posterior negativity (SPN) in response to natural, uncontrolled symmetrical stimuli. <em>Proceedings of the 47th European Conference on Visual Perception (ECVP)</em>, Mainz, Germany. <https://ecvp2025.uni-mainz.de/wp-content/uploads/2025/08/List_of_contributions_ECVP2025-v2.pdf></li>
+
+<li><strong>Oletto</strong>, C. M., Khodami, M. A., Carabba, F., et al. (2025). Combined transcranial alternating current stimulation and perceptual learning for vision improvement in a single-case study of cone dystrophy. <em>Brain Stimulation, 18</em>, 455. <https://doi.org/10.1016/j.brs.2024.12.705></li>
+
+<li><strong>Oletto</strong>, C. M., Contemori, G., Battaglini, L., Herzog, M. H., Bertamini, M. (2024). The CRIP effect: patterns in central vision interfere with perception of patterns in the periphery. <em>Proceedings of the 46th European Conference on Visual Perception (ECVP)</em>, Aberdeen, Scotland. <https://journals.sagepub.com/pb-assets/cmscontent/PEC/ECVP%202024%20Abstracts-1742366759.pdf></li>
+
+<li>Bertamini, M., Contemori, G., Battaglini, L., & <strong>Oletto</strong>, C. M. (2023). The honeycomb illusion: Peripheral vision of contours, unlike that of objects, is refractory to predictions, extrapolation and memory effects. <em>Proceedings of the 45th European Conference on Visual Perception (ECVP)</em>, Paphos, Cyprus. <https://journals.sagepub.com/pb-assets/ecvp23_abstracts_UPD-1702301447867.pdf></li>
+
+<li>Contemori, G., <strong>Oletto</strong>, C. M., Di Dona, G., Ronconi, L., Battaglini, L., & Bertamini, M. (2023). Entrainment of perceptually relevant brain oscillations in visual contour integration: Evidence from tACS and audio-visual entrainment. <em>Proceedings of the 45th European Conference on Visual Perception (ECVP)</em>, Paphos, Cyprus. <https://journals.sagepub.com/pb-assets/ecvp23_abstracts_UPD-1702301447867.pdf></li>
+
+<li><strong>Oletto</strong>, C. M., Contemori, G., Battaglini, L., & Bertamini, M. (2023). Is peripheral object discrimination relying on visual imagery? <em>Proceedings of the 45th European Conference on Visual Perception (ECVP)</em>, Paphos, Cyprus. <https://journals.sagepub.com/pb-assets/ecvp23_abstracts_UPD-1702301447867.pdf></li>
+
+<li>Contemori, G., <strong>Oletto</strong>, C. M., Cessa, R., Battaglini, L., & Bertamini, M. (2022). Foveal feedback and the discrimination of peripheral objects: Timing and role. <em>Proceedings of the 44th European Conference on Visual Perception (ECVP)</em>, Nijmegen, The Netherlands. <https://doi.org/10.1177/03010066221141167></li>
+
+<li><strong>Oletto</strong>, C. M., Contemori, G., Battaglini, L., Cessa, R., & Bertamini, M. (2022). Foveal feedback is specific to the parvocellular system but not to shape related tasks. <em>Proceedings of the 44th European Conference on Visual Perception (ECVP)</em>, Nijmegen, The Netherlands. <https://doi.org/10.1177/03010066221141167></li>
+
+</ul>
+
+## Other
+
+```{r}
+#| label: collaborations
+#| output: asis
+#| echo: false
+
+cat("### Collaborations\n\n")
+
+tibble::tribble(
+  ~period, ~organization, ~details,
+  
+  "24/05/2020 – Present",
+  "<b>NeuroVis.U.S. Lab, Università di Padova, Department of General Psychology, Padova, Italy</b>",
+  "Study of clinical populations with vision loss (amblyopia, hemianopia) and administration of rehabilitative visual training using perceptual learning and transcranial electrical stimulation (tES)"
+) |>
+  cvevents(
+    when = "period",
+    what = "organization",
+    where = "details"
+  )
+```
+
+```{r}
+#| label: peer_review
+#| output: asis
+#| echo: false
+
+cat("### Peer Review Contributions\n\n")
+
+tibble::tribble(
+  ~year, ~journal, ~reviews,
+  
+  "2026",
+  "I-Perception",
+  "Number of peer reviews: 1",
+  
+  "2025",
+  "British Journal of Psychology",
+  "Number of peer reviews: 2",
+  
+  "2025",
+  "PLOS ONE",
+  "Number of peer reviews: 1",
+  
+  "2024",
+  "Perception",
+  "Number of peer reviews: 4",
+  
+  "2023",
+  "Perception",
+  "Number of peer reviews: 2"
+) |>
+  cvevents(
+    when = "year",
+    what = "journal",
+    where = "reviews"
+  )
+```
+
+```{r}
+#| label: skills
+#| output: asis
+#| echo: false
+
+cat("### Skills\n\n")
+
+tibble::tribble(
+  ~category, ~details, ~where,
+  "Languages", "Italian: Native; English: C1; Japanese: A1", "",
+  "Programming & Tools", "Python, Matlab (EEGLab and Psychtoolbox), R", "",
+  "EEG Systems", "Biosemi, Starstim, Micromed, LiveAmp", "",
+  "tES Devices", "BrainStim, Starstim", ""
+) |>
+cvevents(
+  when = "category",
+  what = "details",
+  where = "where"
+)
+```
