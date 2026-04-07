@@ -464,7 +464,7 @@ tibble::tribble(
   
   "02/10/2025 – 04/10/2025",
   "<b>Behavioural Neuroscience Conference</b>", "Agropoli, Italy",
-  "https://behavioural-neuroscience-conference.weebly.com/",
+  "https://behavioural-neuroscience-conference.weebly.com/bn-2025.html",
   
   "19/06/2024 – 21/06/2024",
   "<b>Behavioural Neuroscience Conference (Launch Edition)</b>", "Rome, Italy",
