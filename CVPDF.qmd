@@ -9,6 +9,16 @@ format:
 from: markdown+emoji  
 ---
 
+::: {style="text-align: center;"}
+# Carolina Maria Oletto, PhD.
+
+Researchgate: https://www.researchgate.net/profile/Carolina-Oletto?ev=hdr_xprf
+
+OSF: https://osf.io/user/vqybe
+
+Github: https://karimoletto.github.io/
+:::
+
 ```{r}
 #| label: cvevents
 #| echo: false
@@ -168,12 +178,12 @@ tibble::tribble(
 
 ## Events
 
+### Workshops
+
 ```{r}
 #| label: workshops
 #| output: asis
 #| echo: false
-
-cat("### Workshops & Invited Talks\n\n")
 
 tibble::tribble(
   ~date, ~event, ~location, ~details,
@@ -201,12 +211,12 @@ tibble::tribble(
   )
 ```
 
+### Conferences
+
 ```{r}
 #| label: conferences
 #| output: asis
 #| echo: false
-
-cat("### Conferences\n\n")
 
 tibble::tribble(
   ~year, ~what, ~where,
@@ -254,12 +264,12 @@ cvevents(
 )
 ```
 
+### Summer School
+
 ```{r}
 #| label: summer_school
 #| output: asis
 #| echo: false
-
-cat("### Summer School\n\n")
 
 tibble::tribble(
   ~date, ~event, ~location,
@@ -277,12 +287,12 @@ tibble::tribble(
 
 ## Teaching and Supervision Experience
 
+### Teaching Experience
+
 ```{r}
 #| label: teaching
 #| output: asis
 #| echo: false
-
-cat("### Teaching Experience\n\n")
 
 tibble::tribble(
   ~year, ~role, ~details,
@@ -314,12 +324,12 @@ tibble::tribble(
   )
 ```
 
+### Supervision
+
 ```{r}
 #| label: supervision
 #| output: asis
 #| echo: false
-
-cat("\n\n### Supervision\n\n")
 
 tibble::tribble(
   ~year, ~what, ~where, ~details,
@@ -392,14 +402,12 @@ cvevents(
 
 </ul>
 
-## Other
+## Collaborations
 
 ```{r}
 #| label: collaborations
 #| output: asis
 #| echo: false
-
-cat("### Collaborations\n\n")
 
 tibble::tribble(
   ~period, ~organization, ~details,
@@ -415,12 +423,12 @@ tibble::tribble(
   )
 ```
 
+## Peer Review Contributions
+
 ```{r}
 #| label: peer_review
 #| output: asis
 #| echo: false
-
-cat("### Peer Review Contributions\n\n")
 
 tibble::tribble(
   ~year, ~journal, ~reviews,
@@ -452,37 +460,12 @@ tibble::tribble(
   )
 ```
 
-```{r}
-#| label: Conferences Organisation
-#| output: asis
-#| echo: false
-
-cat("### Conferences Organisation\n\n")
-
-tibble::tribble(
-  ~period, ~organization, ~details,
-  
-  "02/10/2025 – 04/10/2025",
-  "<b>Behavioural Neuroscience Conference, Rome, Italy</b>",
-  "https://behavioural-neuroscience-conference.weebly.com/bn-2025.html",
-  
-  "19/06/2024 – 21/06/2024",
-  "<b>Behavioural Neuroscience Conference (Launch Edition 2024), Rome, Italy</b>",
-  "https://behavioural-neuroscience-conference.weebly.com/launch-edition-2024.html"
-) |>
-  cvevents(
-    when = "period",
-    what = "organization",
-    where = "details"
-  )
-```
+## Skills
 
 ```{r}
 #| label: skills
 #| output: asis
 #| echo: false
-
-cat("### Skills\n\n")
 
 tibble::tribble(
   ~category, ~details, ~where,
