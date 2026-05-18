@@ -348,6 +348,8 @@ cvevents(
 
 <ul>
 
+<li>Guerra, S., Roccato, M., <strong>Oletto</strong>, C. M., Ghiani, A., Bertamini, M., & Battaglini, L. (2026). At the roots of Plant Awareness Disparity (PAD): Semantic processing and numerosity perception. <em>PLOS ONE, 21</em>(5), e0343890. <https://doi.org/10.1371/journal.pone.0343890></li>
+
 <li>Contemori, G., Musa, M., Demirkapi, D., Passaggi, M., <strong>Oletto</strong>, C. M., Battaglini, L., & Bertamini, M. (2026). Sustained posterior negativity (SPN) elicited by brief (20 ms) symmetrical stimuli. <em>Frontiers in Psychology, 16</em>. <https://doi.org/10.3389/fpsyg.2025.1657531></li>
 
 <li><strong>Oletto</strong>, C. M., Contemori, G., Cessa, R., Battaglini, L., & Bertamini, M. (2026). Foveal masking impairs orientation discrimination of peripheral low-level stimuli. <em>Heliyon, 12</em>(1), e44279. <https://doi.org/10.1016/j.heliyon.2025.e44279></li>
@@ -487,7 +489,7 @@ cat("### Skills\n\n")
 
 tibble::tribble(
   ~category, ~details, ~where,
-  "Languages", "Italian: Native; English: C1; Japanese: A1", "",
+  "Languages", "Italian: Native; English: C1; Japanese: A1; Danish: A1", "",
   "Programming & Tools", "Python, Matlab (EEGLab and Psychtoolbox), R", "",
   "EEG Systems", "Biosemi, Starstim, Micromed, LiveAmp", "",
   "tES Devices", "BrainStim, Starstim", ""
