@@ -428,6 +428,10 @@ tibble::tribble(
   ~year, ~journal, ~reviews,
   
   "2026",
+  "PLOS ONE",
+  "Number of peer reviews: 1",
+  
+  "2026",
   "I-Perception",
   "Number of peer reviews: 1",
   
